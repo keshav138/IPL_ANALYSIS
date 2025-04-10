@@ -1,0 +1,16 @@
+# VS Code settings
+.vscode/
+
+# Jupyter notebook checkpoints
+.ipynb_checkpoints/
+
+# Python bytecode
+__pycache__/
+*.pyc
+
+# System files (safe to ignore)
+.DS_Store
+Thumbs.db
+
+# Excel temp files (future-proofing)
+~$*.xlsx
