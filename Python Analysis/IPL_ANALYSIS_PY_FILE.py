@@ -1,4 +1,4 @@
-
+# %%
 import numpy as np
 import pandas as pd
 import seaborn as sns
@@ -124,8 +124,9 @@ bowling_df
 batting_integers = batting_df[['Runs','Balls_Faced','Strike_Rate']]
 bowling_integers = bowling_df[['Runs_Conceded','Balls_Bowled','Economy','Bowling_Strike_Rate']]
 
-
-print(bowling_integers.describe(),"\n")
+print("Batting Integer Statistical Summary\n")
+print(batting_integers.describe(),"\n")
+print("Bowling Integer Statistical Summary\n")
 print(bowling_integers.describe())
 
 # %%
@@ -353,7 +354,7 @@ for i, dismissal in enumerate(dismissal_by_type):
         x=top_bowlers[dismissal].values,
         y=top_bowlers.index,
         ax=axes[i],
-        palette="viridis",
+        palette="BuPu",
         hue = top_bowlers[dismissal].values
     )
     
@@ -366,6 +367,9 @@ for i, dismissal in enumerate(dismissal_by_type):
 
 plt.tight_layout()
 plt.show()
+
+
+# %%
 
 
 # %%
@@ -527,19 +531,20 @@ venue_decision_pivot = venue_decision_pivot.sort_values('Total', ascending=False
 venue_decision_pivot.drop(columns='Total', inplace=True)
 
 
-ax = venue_decision_pivot.plot(
+ax = venue_decision_pivot.head(25).plot(
     kind = 'barh',
+    stacked=True,
     figsize=(10,16),
-    color={'Bat': '#F7C948', 'Field': '#045093'}
+    color={'Bat': '#f2008d', 'Field': '#51005f'},
 )
 ax.invert_yaxis()
  
 for container in ax.containers:
-    ax.bar_label(container, fmt='%.0f', label_type='edge', padding=3, fontsize=6)
+    ax.bar_label(container, fmt='%.0f', label_type='center', padding=3, fontsize=10,color='white')
     
 
 
-plt.title("Toss Decision Leading to Wins by Venue",fontweight="bold",fontsize=16,pad=20,loc='left')
+plt.title("TOSS DECISION LEADING TO WINS BY VENUE",fontweight="bold",fontsize=16,pad=20,loc='left',color='#202124')
 plt.xlabel("Number of Wins (Where Toss Winner Won)",fontweight='bold',fontsize=12,labelpad=10)
 plt.ylabel("Venue",fontweight='bold',fontsize=12,labelpad=10,loc='center')
 plt.show()
@@ -554,7 +559,7 @@ print(top_pom)
 
 # %%
 plt.figure(figsize=(10,6))
-barplot = sns.barplot(data = top_pom, x = 'Awards', y='Player',palette="magma", hue='Awards')
+barplot = sns.barplot(data = top_pom, x = 'Awards', y='Player',palette="cubehelix",hue='Player')
 
 for container in barplot.containers:
     barplot.bar_label(container, fmt='%.0f', label_type='edge', padding=3, fontsize=10)
@@ -614,7 +619,7 @@ team_bowling = (
 
 
 plt.figure(figsize=(14,9))
-barplot = sns.barplot(data = team_bowling, x = 'Bowling_Team', y='Dismissals',palette="rocket", hue='Dismissals',width=0.5)
+barplot = sns.barplot(data = team_bowling, x = 'Bowling_Team', y='Dismissals',palette="YlGnBu", hue='Dismissals',width=0.5)
 
 
 for container in barplot.containers:
